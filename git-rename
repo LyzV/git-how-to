@@ -1,0 +1,6 @@
+#!/bin/bash
+echo git mv $1 $2
+git mv $1 $2
+
+
+

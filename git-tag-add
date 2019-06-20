@@ -1,0 +1,6 @@
+#!/bin/bash
+echo git tag -a $1 $2
+git tag -a $1 $2
+
+
+

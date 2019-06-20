@@ -1,0 +1,6 @@
+#!/bin/bash
+echo git tag --list
+git tag --list
+
+
+

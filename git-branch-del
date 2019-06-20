@@ -1,0 +1,6 @@
+#!/bin/bash
+echo git branch -d $1
+git branch -d $1
+
+
+
