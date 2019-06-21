@@ -16,3 +16,6 @@ user2:
 # git commit -a -m "user2: add foo2"
 # git push origin idea
 
+В руководстве GIT для пользователя user1 не обязательно делать push с 
+опцией -u, можно и без неё!
+
