@@ -1,0 +1,18 @@
+Полагаем, что над разработкой работают 2 пользователя: user1 и user2.
+user1 создаёт и публикует ветку idea. user2 вытягивает изменения и 
+правильно создаёт ветку, которая отслеживает удалённую ветку idea
+
+user1:
+# git branch idea
+# git chechout idea
+# echo void foo1\(void\){} >> main.c
+# git commit -a -m "user1: add foo1"
+# git push -u origin idea
+
+user2:
+# git fetch origin
+# git checkout -b idea origin/idea
+# echo void foo2\(void\){} >> main.c
+# git commit -a -m "user2: add foo2"
+# git push origin idea
+
