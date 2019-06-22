@@ -1,17 +1,68 @@
 git-cервер будем устанавливать на Windows+cygwin. Клиентами будут: Linux, Windows.
 
+Я использовал следующее руководство:
+http://cccp-blog.com/koding/sozdayom-git-server-svoimi-rukami
+
 Общий порядок действий:
 1. Устанавливаем cygwin
 2. В cygwin устанавливаем: ssh; git.
 3. Настройка ssh-сервера и запуск службы.
-4. Проверка сетевого доступа между сервером и клиентскими машинами.
-5. На клиентских машинах ставим ssh-client и git.
-6. Проверяем сервер на предмет брэндмауэра (не блокирует-ли трафик).
-7. Настраиваем ssh-клиента на Windows-host-е.
-7. Проверяем работу ssh-сервера с помощью PuTTY с Windows-клиента.
+4. Если пара ключей ещё не сгенерированы, то сгенерировать. Использовать ssh-keygen
+5. Создаём пустой репозиторий myrepo.git
+6. Проверка сетевого доступа между сервером и клиентскими машинами.
+7. На клиентских машинах ставим ssh-client и git.
+8. Проверяем сервер на предмет брэндмауэра (не блокирует-ли трафик).
+9. Проверяем работу ssh-сервера с помощью PuTTY с Windows-клиента.
+10. Настраиваем ssh-клиента на Windows-host-е.
 
 1,2 Процесс установки cygwin, ssh и git на стороне сервера я опущу.
 
-3. Настройка ssh-сервера и запуск службы
+3. Настройка ssh-сервера и запуск службы выполнить по следующему руководству:
+http://www.noah.org/ssh/cygwin-sshd.html
+Кроме этого необходимо настроить следующие файлы:
+/etc/ssh_config
+	Host *
+	Port 22
+	AuthorizedKeysFile %h/.ssh/authorized_keys
+
+/home/vova-pc/.ssh/authorized_keys
+	Сюда поместить публичные ключи клиентов.
+	Внимание! Ключ должен быть размещён в одну строку! Его внешний вид такой:
+	ssh-rsa Далее_идёт_буквенно_цифровой_код LyzV@yandex.ru 
+
+
+5. Создаём пустой репозиторий myrepo.git
+	cd ~
+	mkdir ~/git
+	mkdir ~/git/myrepo.git
+	cd ~/git/myrepo.git
+	git init --bare
+
+9. Проверяем работу ssh-сервера с помощью PuTTY с Windows-клиента
+а) Генерим ключи с помощью PuTTy-gen. Сохраняем их.
+Настраиваем PuTTy:
+а) Вкладка Session:
+	Host Name: vova-pc или IP-адрес сервера
+	Connection type: SSH
+	Port: 22
+б) Вкладка 	SSH/Auth:
+	Private key file for authentication: Выбираем закрытый ключ, который сгенерировали программой PuTTy-gen
+	
+
+
+10. Настраиваем ssh-клиента на linux-host-е:
+a) Генерим ключи, размещаем их в /home/vova/.ssh/id_rsa
+   и /home/vova/.ssh/id_rsa.pub
+б) Создаём файл /home/vova/.ssh/config
+	IdentityFile ~/.ssh/id_rsa
+	Port 22
+	PubkeyAuthentication yes
+	User vova-pc
+в) Пробуем соединиться:
+	ssh vova-pc@192.168.1.139
+г) Пробуем git:
+	git clone vova-pc@192.168.1.139:/home/vova-pc/git/myrepo.git
+    
+
 
 
