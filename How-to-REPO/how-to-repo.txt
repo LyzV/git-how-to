@@ -1,0 +1,41 @@
+REPO служит для совместного управления несколькими git-проектами - мета-проектами (аналогично тому, как мы делали прокет КСУ на SVN). Каждая подсистема (git-проект) имеет свою версионность. Мета-проект включает в себя другие подпроекты с определёнными версиями. Когда мы используем repo, то вытаскиваем мета-проект с его подсистемами (которые под своими версиями).
+
+Для создания сложного проекта comp-prj необходимо выпопнить следующие действия:
+1) Создать git-проект манифеста. В этом проекте будет всего один файл default.xml, в котором будет полностью настроен мета-проект (состав подпроектов и как их взять). Формат файла описан здесь: https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md
+В этом проекте в корне лежит только один файл - default.xml
+Вот наш пример такого файла:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md -->
+<!-- https://www.instructables.com/id/Using-Googles-repo-command-in-your-own-projects/ -->
+<manifest>
+        <!-- Значение аттрибутов по умолчанию -->
+        <default remote="github" revision="refs/heads/master" />
+        <!-- Настройка удалённого репозитария -->
+        <remote name="github" fetch="https://github.com/LyzV" pushurl="https://github.com/LyzV" />
+        <!-- Перечень проектов.
+                name - имя проекта в репозитории (будет https://github.com/LyzV/cprj)
+                path - имя папки куда будет скопирован проект
+                remote - путь к репозиторию (отсутсвует - будет взят из элемента default)
+                revision - ссылка на снэпшот (хэш или тэг)
+        -->
+        <project name="cprj" path="learn/cprj" />
+        <project name="git-how-to" path="learn/git-how-to" />
+<!--    <project remote="github" name="cprj" path="learn/cprj" revision="refs/tags/t1.1" />  -->
+</manifest>
+
+2) Пусть URL нашего git-проекта манифеста будет: https://github.com/LyzV/manifest.git
+3) Создаём папку нашего meta-проекта:
+# cd ~/prj
+# mkdir comp-prj
+# cd comp-prj
+
+4) Создаём наш meta-проект:
+# repo init -u https://github.com/LyzV/manifest.git
+# repo sync
+
+5) Всё, теперь в папке comp-prj будут размещены следующие каталоги:
+learn/cprj 			- проект простого C
+learn/git-how-to    - проект HowTo
+.repo 				- внутренние файлы REPO
