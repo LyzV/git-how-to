@@ -66,4 +66,24 @@ $ git rm --cached README
 15. Чтобы удалить целый каталог из индекса:
 $ git rm -r --cached folder/
 
-16. 
+16. Для просмотра коммитов:
+$ git log
+
+17. Для просмотра коммитов с показом разницы:
+$ git log --patch
+
+18. Для просмотра коммитов в одну строчку:
+$ git log --pretty=oneline
+
+19. Как изменить комментарий к последнему коммиту?
+$ git commit --amend
+
+20. Если необходимо вдогонок к коммиту добавить ещё один файл:
+$ git commit -m "first commit"
+$ git add some_else_file
+$ git commit --amend
+
+21. Чтобы убрать файл file.txt из индекса:
+$ git reset HEAD file.txt
+
+22. 
