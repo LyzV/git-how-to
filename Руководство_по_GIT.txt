@@ -52,5 +52,11 @@ $ git diff README
 
 12. Чтобы посмотреть различия между файлами в индексе (staged) и последним коммитом (репозитории):
 $ git diff --staged
+или
+$ git diff --cached
+	--staged и --cached - синонимы.
 
-13. 
+13. Чтобы выполнить коммит индекса:
+$ git commit -m "Modifies file Руководство_по_GIT.txt"
+
+14. 
