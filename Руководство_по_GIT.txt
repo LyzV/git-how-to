@@ -1,0 +1,12 @@
+Руководство по GIT
+
+1. GIT имеет 3 директории:
+	- Рабочая (Working Directory);
+	- Область подготовленных файлов (Staging Area, Index);
+	- Репозиторий (.git directory).
+
+2. Для того, чтобы посмотреть свои настройки:
+$ git config --list
+
+3. Для установки глобального редактора:
+$ git config --global core.editor /opt/sublime_text/sublime_text
