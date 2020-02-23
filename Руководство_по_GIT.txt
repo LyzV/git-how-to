@@ -59,4 +59,8 @@ $ git diff --cached
 13. Чтобы выполнить коммит индекса:
 $ git commit -m "Modifies file Руководство_по_GIT.txt"
 
-14. 
+14. Чтобы удалить файл README из индекса:
+$ git rm --cached README
+
+15. Чтобы удалить целый каталог из индекса:
+$ git rm -r --cached folder/
