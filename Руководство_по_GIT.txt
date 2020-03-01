@@ -76,7 +76,9 @@ $ git log
 $ git log --patch
 
 19. Для просмотра коммитов в одну строчку:
-$ git log --pretty=oneline
+$ git log --oneline
+	или
+$ git log --oneline --decorate --graph --all
 
 20. Как изменить комментарий к последнему коммиту?
 $ git commit --amend
@@ -154,5 +156,36 @@ $ git checkout v13.1.10
 $ git checkout v13.1.10 -b old_branch
 	Всё, после этого у нас ветка old_branch, ответвлённая от тэга v13.1.10
 
-https://git-scm.com/book/ru/v2/%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-Git-%D0%9F%D1%81%D0%B5%D0%B2%D0%B4%D0%BE%D0%BD%D0%B8%D0%BC%D1%8B-%D0%B2-Git
-40. 
+40. Для того, чтобы создать ветку:
+$ git branch new_branch
+	При этом HEAD остаётся на старой ветке.
+
+41. Чтобы перейти на новую ветку:
+$ git checkout new_branch
+
+42. Чтобы создать и сразу перейти на новую ветку:
+$ git checkout -b new_branch
+
+43. Чтобы удалить ветку:
+$ git branch -d new_branch
+
+44. Чтобы слить ветку new_branch в ветку master:
+$ git checkout master
+$ git merge new_branch
+
+45. Если во время автоматического слияния возникли конфликты, то git укажет какие файлы не 
+	может слить автоматически. Кроме этого он модифицирует их, внеся в них оба варианта конфликтующих
+	сторон.
+<<<<<<< HEAD 
+	Здесь вариант от текущей ветки master 
+============
+	А здесь вариант от ветки которую мы сливаем - new_branch
+>>>>>>> new_branch
+	Потребуется вручную заменить весь этот текст.
+
+46. Для разрешения конфликтов можно запустить внешний инструмент слияния:
+$ git mergetool
+	Инструмент слияния проведёт по всем конфликтующим файлам.
+
+
+https://git-scm.com/book/ru/v2/%D0%92%D0%B5%D1%82%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-Git-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D0%B2%D0%B5%D1%82%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D0%BB%D0%B8%D1%8F%D0%BD%D0%B8%D1%8F
